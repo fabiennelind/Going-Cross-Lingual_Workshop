@@ -26,7 +26,7 @@ OPTED Living hub and knowledge base for multilingual computational text analysis
 
 ## Further readings
 
-Lind, F. (2021). Multilingual Automated Content Analysis for Comparative Communication Research. Dissertation. [Happy to send you a copy](mailto:fabienne.lind@univie.ac.at).
+Lind, F. (2021). Multilingual Automated Content Analysis for Comparative Communication Research. (Doctoral Dissertation, University of Vienna). [Happy to send you a copy](mailto:fabienne.lind@univie.ac.at).
 
 Livingstone, S. (2003). On the challenges of cross-national comparative media research. European Journal of Communication, 18(4), 477–500. [Link](https://doi.org/10.1177/0267323103184003). 
 
