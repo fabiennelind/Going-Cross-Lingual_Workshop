@@ -18,13 +18,11 @@ Instructions that facilitate the implementation of PLTM (Mimno et al., 2009) are
 
 ## More resources for multilingual text analysis
 
-Lemmatization with udpipe (Wijffels, 2021) 
-[Tutorial](https://cran.r-project.org/web/packages/udpipe/vignettes/udpipe-annotation.html)
+A [Tutorial](https://cran.r-project.org/web/packages/udpipe/vignettes/udpipe-annotation.html) on lemmatization with udpipe (Wijffels, 2021). 
 
-Machine Translation with deeplr (Zumbach & Bauer, 2021)
-[Tutorial](https://github.com/zumbov2/deeplr)
+A [Tutorial](https://github.com/zumbov2/deeplr) on machine Translation with deeplr (Zumbach & Bauer, 2021).
 
-OPTED Living hub and knowledge base for multilingual computational text analysis [coming soon](https://opted.eu/designing-an-infrastructure/wp6-multilingual-text-analysis-and-validation-standards/)
+OPTED Living hub and knowledge base for multilingual computational text analysis [coming soon](https://opted.eu/designing-an-infrastructure/wp6-multilingual-text-analysis-and-validation-standards/).
 
 
 
