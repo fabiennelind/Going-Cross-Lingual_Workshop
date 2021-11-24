@@ -1,7 +1,8 @@
 # Workshop Multilingual Automated Content Analysis for Comparative Social Science Research
 
-This repository contains the materials for a workshop helf at [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/)
-The slides 
+This repository contains the materials for a workshop held at [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/).
+It inludes slides `workshop slides.pdf` and an example data set `multilingual_data_annotated_translated.csv`.
+
 
 ## Text Classification for Comparative Research
 
