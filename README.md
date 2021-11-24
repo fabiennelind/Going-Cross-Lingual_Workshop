@@ -1,5 +1,5 @@
-This repository contains the materials for a workshop held at [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/).
-It inludes slides `workshop_slides.pdf` and an example text data set `multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
+This repository contains the materials for a workshop held at the [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/).
+It includes the slides `workshop_slides.pdf` and an example text data set `multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
 
 ## Workshop Outline
 Automated text analysis methods have become popular in computational social science. They appeal as they promise the automated extraction of meaning from large numbers of documents, thus allowing to better understand the contents and, indirectly, the document creators and audiences. While the existing techniques are well established for English-language text, the situation is different when it comes to the study of text in more than one language and in languages other than English. Yet it is precisely these multilingual techniques that are needed for (country) comparative research designs. 
@@ -23,6 +23,16 @@ A [Tutorial](https://cran.r-project.org/web/packages/udpipe/vignettes/udpipe-ann
 A [Tutorial](https://github.com/zumbov2/deeplr) on machine Translation with deeplr (Zumbach & Bauer, 2021).
 
 OPTED Living hub and knowledge base for multilingual computational text analysis [coming soon](https://opted.eu/designing-an-infrastructure/wp6-multilingual-text-analysis-and-validation-standards/).
+
+## Further readings
+
+Lind, F. (2021). Multilingual Automated Content Analysis for Comparative Communication Research. Dissertation. [Happy to send you a copy](fabienne.lind@univie.ac.at)
+
+Livingstone, S. (2003). On the challenges of cross-national comparative media research. European Journal of Communication, 18(4), 477–500. [Read](https://doi.org/10.1177/0267323103184003) 
+
+Lucas, C., Nielsen, R. A., Roberts, M. E., Stewart, B. M., Storer, A., & Tingley, D. (2015). Computer-assisted text analysis for comparative politics. Political Analysis, 23(2), 254–277.[Read](https://doi.org/10.1093/pan/mpu019)
+
+
 
 
 
