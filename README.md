@@ -1,4 +1,4 @@
-This repository contains the materials for a workshop held at the [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/).
+This repository contains the materials for a workshop held at the [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/) and at the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/).
 It includes the slides `workshop_slides.pdf` and an example text data set `multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
 
 ## Workshop Outline
@@ -22,7 +22,7 @@ A [Tutorial](https://cran.r-project.org/web/packages/udpipe/vignettes/udpipe-ann
 
 A [Tutorial](https://github.com/zumbov2/deeplr) on machine Translation with deeplr (Zumbach & Bauer, 2021).
 
-OPTED Living hub and knowledge base for multilingual computational text analysis [coming soon](https://opted.eu/designing-an-infrastructure/wp6-multilingual-text-analysis-and-validation-standards/).
+[OPTED Living hub](https://opted.eu/results/inventories/) a knowledge base for multilingual computational text analysis.
 
 ## Further readings
 
