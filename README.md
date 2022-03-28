@@ -1,4 +1,4 @@
-This repository contains the materials for a workshop held at the [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/) and at the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/).
+This repository contains the materials for workshops held at the [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/) and at the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/).
 It includes the slides `workshop_slides.pdf` and an example text data set `multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
 
 ## Workshop Outline
