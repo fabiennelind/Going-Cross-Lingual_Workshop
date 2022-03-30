@@ -1,0 +1,244 @@
+---
+title: "Pre-processing of multilingual documents"
+author: "Fabienne Lind"
+date: "March, 2022"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Pre-processing of Multilingual Documents
+
+## Data
+
+For the next tasks, we will work with an example text data, headlines from news articles about migration. The data set is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
+
+Let's load the data first and take a look. Each row represents one news article. How many articles per country do we have?
+
+```{r}
+
+articles <- read.csv("https://raw.githubusercontent.com/fabiennelind/Workshop_Multilingual-Text-Analysis_and_Comparative-Research/master/data/multilingual_data_annotated_translated.csv?token=AH2Y4HB34Z25K53J2X7QEV3BS7ADO")
+#as.data.frame(articles)
+table(articles$country) 
+
+```
+
+
+Let us now inspect the column `headline`, the column with our text to be pre-processed. 
+
+```{r}
+
+head(articles$headline) # show the first lines of the column
+class(articles$headline) # check the class of the column.
+articles$headline <- as.character(articles$headline) # Change the class to character.
+class(articles$headline) # check if the edit worked.
+
+```
+
+For our exercise, we work with the headlines of the corpus parts published in Germany, Spain, and the UK seperately. Thus, we first need to apply a filter. To select a subset of the data, we can use for example `subset`. We save the German subset in dataframe objects called `articles_de`, the Spanish part in a dataframe called `articles_es`, the English part in a dataframe called `articles_en`.
+
+```{r}
+
+articles_de <- subset(articles, country == "Germany")
+articles_es <- subset(articles, country == "Spain")
+articles_en <- subset(articles, country == "UK")
+
+```
+
+
+## UDPipe for Lemmatization
+
+We will now use the R package [UDIpipe](https://cran.r-project.org/web/packages/udpipe/index.html) to perform lemmatization. 
+
+For additional UDPipe instructions, I can recommend [this](https://cran.r-project.org/web/packages/udpipe/vignettes/udpipe-annotation.html) tutorial by the author Jan Wijffels.
+
+We want to lemmatize the headlines. The R package does this based on language models. We download the model first and use then `udpipe_annotate` to perform  lemmatization. The function does also tokenisation, tagging,and dependency parsing.
+
+We do this language by language.
+
+```{r}
+
+library(udpipe)
+udmodel_de <- udpipe_download_model(language = "german") 
+udmodel_de <- udpipe_load_model(file = udmodel_de$file_model)
+
+udi_de <- udpipe_annotate(udmodel_de, x = articles_de$headline, doc_id = articles_de$id) # specify the text column and id column
+udi_de <- as.data.frame(udi_de)
+
+```
+
+
+```{r}
+
+udmodel_es <- udpipe_download_model(language = "spanish")
+udmodel_es <- udpipe_load_model(file = udmodel_es$file_model)
+udi_es <- udpipe_annotate(udmodel_es, x = articles_es$headline, doc_id = articles_es$id)
+udi_es <- as.data.frame(udi_es)
+
+```
+
+```{r}
+
+udmodel_en <- udpipe_download_model(language = "english")
+udmodel_en <- udpipe_load_model(file = udmodel_en$file_model)
+udi_en <- udpipe_annotate(udmodel_en, x = articles_en$headline, doc_id = articles_en$id)
+udi_en <- as.data.frame(udi_en)
+
+```
+
+Now, it is time for some data reorganization. 
+A code snippet that allows to add a new column with the lemmatized text to your corpus. We do this now for the German subset as an example. To perform it also for the Spanish and English part, "de" has to be replaced with "es" or "en".
+
+```{r}
+
+#udi_es_pos <- subset(udi_es, upos %in% c("NOUN")) # in case, you like to filter only specifc lemmas you can activite this line, here one option to use only nouns 
+
+library(dplyr)
+udi_de_lemma <- udi_de %>% 
+  group_by(doc_id) %>% 
+  mutate(headline_lemma = paste0(lemma, collapse = " "))
+
+names(udi_de_lemma)[names(udi_de_lemma)=="doc_id"] <- "id" #rename column doc_id and use the article id of your corpus 'id'
+udi_de_lemma <- subset(udi_de_lemma, select = c(id, headline_lemma))
+
+
+udi_de_lemma$dupl <- duplicated(udi_de_lemma$id) #tag duplicated rows
+udi_de_lemma <- subset(udi_de_lemma, dupl == FALSE)# select only unique rows
+udi_de_lemma <- subset(udi_de_lemma, select = c(id, headline_lemma)) #select only relevant columns
+#udi_de_lemma$id <- as.character(udi_de_lemma$id) 
+
+#add the new column 'headline_lemma' to the corpus
+
+articles_de$id <- as.character(articles_de$id)
+articles_de <- left_join(articles_de, udi_de_lemma, by = "id")
+
+```
+
+
+
+
+## Translation
+
+One approach to process the multilingual documents all together is to translate them first into a common language. Translation can also be useful or necessay to be performed on keywords of a search string, keywords of a dictionary, codebook instructions, extracted Part-of-Speech etc. 
+
+Next to manual translation, machine translation can be performed. 
+
+- [DeepL](https://www.rstudio.com)
+
+To calculate the prize beforehand, I recommend to count the number of characters first for example with `n_char`.
+
+```{r}
+
+#number of characters DE sample
+n_char <- nchar(articles_de$headline)# whitespaces are also counted 
+n_char_de <- sum(n_char, na.rm = T) 
+
+#number of characters ES sample
+n_char <- nchar(articles_es$headline)# whitespaces are also counted 
+n_char_es <- sum(n_char, na.rm = T) 
+
+
+
+#Caluclate Prize
+translation_prize_case <- (((n_char_de + n_char_es)/1000000)*20) #Neutral Translation Model Online Predictions (20 Dollar/1M Characters)
+translation_prize_case 
+
+```
+
+
+### Option 1: DeepL API
+
+DeepL offers the [DeepL API Free](https://www.deepl.com/en/docs-api/) which allows a maximum of 500,000 characters/month to be translated for free. To use the API, it is necessary to create an account and provide your credit card details. After creating an account you will receive an Authentication Key (You find it your DeepL account settings). With [deeplr](https://github.com/zumbov2/deeplr) [(Zumbach & Bauer, 2021)](https://CRAN.R-project.org/package=deeplr), a new wrapper for the DeepL API it is easily possible to work with it from R. 
+
+
+```{r}
+#install.packages("deeplr")
+library(deeplr)
+
+#show available languages
+#langs <- available_languages2("my_key") #Replace `my_key` with your Authentication Key.
+#as.data.frame(langs)
+
+#monitor your usage
+#usage2("my_key") #Replace `my_key` with your Authentication Key.
+
+
+```
+
+
+This code will translate the text of column `headline_de` and `headline_es` and save the result in `headline_mt`. The source languages is guessed automatically if `source_lang = NULL`. The target language is here defined as `EN` = English.
+
+
+```{r}
+
+#translate DE to EN
+#articles_de$headline_mt <- translate2(
+#  articles_de$headline,
+#  source_lang = DE, #if source_lang = NULL, the source language will be guessed
+#  target_lang = "EN",
+#  auth_key = "my_key" #Replace `my_key` with your Authentication Key.
+#  )
+
+as.data.frame(articles_de)
+
+#translate ES to EN
+#articles_es$headline_mt <- translate2(
+#  articles_es$headline,
+#  source_lang = ES, #if source_lang = NULL, the source language will be guessed
+#  target_lang = "EN",
+#  auth_key = "my_key" #Replace `my_key` with your Authentication Key.
+#  )
+
+# No need to translate the Uk subset of course
+
+```
+
+
+
+### Option 2: Google Translate API
+
+Google Translate offers also a Translation API. The advantage: At the moment, Google offers more languages than DeepL.
+Please note: using the Google API is not free of charge. 
+
+One R package that allows to call the API easily is [googleLanguageR](https://cran.r-project.org/web/packages/googleLanguageR/vignettes/setup.html)
+
+
+Before using Google TranslateAPI always first set up a Google API Console Project and add a payment method: https://console.cloud.google.com/apis/dashboard?project=translate-189408&duration=PT1H
+
+
+```{r}
+
+install.packages("googleAuthR")
+install.packages("googleLanguageR")
+#devtools::install_github("ropensci/googleLanguageR") #http://code.markedmondson.me/googleLanguageR/
+
+library(googleLanguageR)
+library(googleAuthR)
+
+gl_auth("location_of_json_file.json") #Set the file location of your download Google Project JSON file 
+
+
+```
+
+Next, the German and Spanish headlines are translated into English.  
+
+```{r}
+
+headline_mt <- gl_translate(articles_de$headline, source = "de", target = "en")$translatedText 
+euronews_de$headline_mt  <- headline_mt
+
+headline_mt <- gl_translate(articles_es$headline, source = "es", target = "en")$translatedText 
+articles_es$headline_mt  <- headline_mt
+
+
+```
+
+
+## Order of pre-processing steps
+
+
+- If you plan to work with machine translated text, translate the original text. Lemmatization/POS Tagging is then performed afterwards with the translated text.
+
+- If you plan to work with original language text, then lemmatize langage by language with the respective language model.
+
+
