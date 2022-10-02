@@ -1,5 +1,7 @@
 This repository contains the materials for workshops held at the [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/), at the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/) and at the media and communication department at the LMU Munich.
-It includes the slides `workshop_slides.pdf` and an example text data set `multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B) and a R script `multilingual_lemmatizing_translation.Rmd` to perform lemmatization and machine translation with a multilingual corpus.
+It includes the slides `workshop_slides.pdf` and an example text data set `multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
+
+The R script `input_alignment_task_description.Rdm.Rmd` includes some tasks to practise the input alignment approach with an example. The script `input_alignment_solution.Rmd` provides the solutions.
 
 ## Workshop Outline
 Automated text analysis methods have become popular in computational social science. They appeal as they promise the automated extraction of meaning from large numbers of documents, thus allowing to better understand the contents and, indirectly, the document creators and audiences. While the existing techniques are well established for English-language text, the situation is different when it comes to the study of text in more than one language and in languages other than English. Yet, it is precisely these multilingual techniques that are needed for (country) comparative research designs. 
