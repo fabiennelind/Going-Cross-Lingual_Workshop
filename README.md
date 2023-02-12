@@ -34,15 +34,15 @@ A [Tutorial](https://github.com/zumbov2/deeplr) on machine Translation with deep
 
 ## Further readings
 
-Esser, F., & Vliegenthart, R. (2017). Comparative research methods. The International Encyclopedia of Communication Research Methods. [Link](https://doi.org/10.1002/9781118901731.iecrm0035).
+Esser, F., & Vliegenthart, R. (2017). Comparative research methods. The International Encyclopedia of Communication Research Methods. [https://doi.org/10.1002/9781118901731.iecrm0035](https://doi.org/10.1002/9781118901731.iecrm0035).
 
-Licht, H. (2022). Cross-Lingual Classification of Political Texts Using Multilingual Sentence Embeddings. Political Analysis [Link](https://doi.org/10.1017/pan.2022.29).
+Licht, H. (2022). Cross-Lingual Classification of Political Texts Using Multilingual Sentence Embeddings. Political Analysis [https://doi.org/10.1017/pan.2022.29](https://doi.org/10.1017/pan.2022.29).
 
 Lind, F. (2021). Multilingual Automated Content Analysis for Comparative Communication Research. (Doctoral Dissertation, University of Vienna). [Happy to send you a copy](mailto:fabienne.lind@univie.ac.at).
 
-Livingstone, S. (2003). On the challenges of cross-national comparative media research. European Journal of Communication, 18(4), 477–500. [Link](https://doi.org/10.1177/0267323103184003). 
+Livingstone, S. (2003). On the challenges of cross-national comparative media research. European Journal of Communication, 18(4), 477–500. [https://doi.org/10.1177/0267323103184003](https://doi.org/10.1177/0267323103184003). 
 
-Lucas, C., Nielsen, R. A., Roberts, M. E., Stewart, B. M., Storer, A., & Tingley, D. (2015). Computer-assisted text analysis for comparative politics. Political Analysis, 23(2), 254–277. [Link](https://doi.org/10.1093/pan/mpu019).
+Lucas, C., Nielsen, R. A., Roberts, M. E., Stewart, B. M., Storer, A., & Tingley, D. (2015). Computer-assisted text analysis for comparative politics. Political Analysis, 23(2), 254–277. [https://doi.org/10.1093/pan/mpu019](https://doi.org/10.1093/pan/mpu019).
 
 
 
