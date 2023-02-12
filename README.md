@@ -1,10 +1,19 @@
 This repository contains the materials for workshops held at the [MZES Social Science Data Lab](https://www.mzes.uni-mannheim.de/socialsciencedatalab/), at the [Connected_Politics Lab](https://www.ucd.ie/connected_politics/), the media and communication department at the LMU Munich, and the [Digital Society Initiative of the University of Zurich](https://www.dsi.uzh.ch/de.html).
-It includes the slides `workshop_slides.pdf` and example text data sets `multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
-
-The R script `input_alignment_task_description.Rdm.Rmd` includes some tasks to practise the input alignment approach with an example. The script `input_alignment_solution.Rmd` provides the solutions.
 
 ## Workshop Outline
 The wide-reaching and still growing digitalization of communication raised a demand for internationally, cross-lingually comparative research. In this workshop, participants learn the main approaches and strategies for studying social science related concepts in multilingual text collections with automated content analysis methods. The workshop focuses on aspects relevant for applying these methods to compare concepts across socio-political contexts. The workshop includes hands-on exercises with R.
+
+## Workshop Material
+
+###Slides:
+`workshop_slides.pdf` 
+
+Example text data sets:
+`multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
+
+Code:
+
+The R script `input_alignment_task_description.Rdm.Rmd` includes some tasks to practise the input alignment approach with an example. The script `input_alignment_solution.Rmd` provides the solutions.
 
 
 ## Text Classification for Comparative Research
