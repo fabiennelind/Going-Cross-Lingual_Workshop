@@ -5,15 +5,15 @@ The wide-reaching and still growing digitalization of communication raised a dem
 
 ## Workshop Material
 
-###Slides:
+Slides:
 `workshop_slides.pdf` 
 
 Example text data sets:
 `multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
 
 Code:
-
 The R script `input_alignment_task_description.Rdm.Rmd` includes some tasks to practise the input alignment approach with an example. The script `input_alignment_solution.Rmd` provides the solutions.
+The R script `named_entity_extracttion.Rmd`
 
 
 ## Text Classification for Comparative Research
