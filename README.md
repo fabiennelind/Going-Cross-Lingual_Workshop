@@ -5,15 +5,11 @@ The wide-reaching and still growing digitalization of communication raised a dem
 
 ## Workshop Material
 
-Slides:
-`workshop_slides.pdf` 
+- Slides: `workshop_slides.pdf` 
 
-Example text data sets:
-`multilingual_data_annotated_translated.csv` which is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
-and `climate_news.csv`
+- Example text data sets with migration and climate texts.
 
-Code:
-The R script with tasks and solutions.
+- Code: R scripts with tasks and solutions.
 
 
 ## Text Classification for Comparative Research
