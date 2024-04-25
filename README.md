@@ -3,8 +3,6 @@ This repository contains the materials for workshops held at the [MZES Social Sc
 ## Workshop Outline
 The wide-reaching and still growing digitalization of communication raised a demand for internationally, cross-lingually comparative research. In this workshop, participants learn the main approaches and strategies for studying social science related concepts in multilingual text collections with automated content analysis methods. The workshop focuses on aspects relevant for applying these methods to compare concepts across socio-political contexts. The workshop includes hands-on exercises with R.
 
-https://raw.githubusercontent.com/fabiennelind/Workshop_Multilingual-Text-Analysis_and_Comparative-Research/master/data/multilingual_data_annotated_translated.csv
-
 ## Workshop Material
 
 - Slides: `workshop_slides.pdf` 
