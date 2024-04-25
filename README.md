@@ -22,6 +22,8 @@ Instructions that facilitate the implementation of PLTM (Mimno et al., 2009) are
 
 ## More resources for multilingual text analysis
 
+Materials for a three day course on the topic (R and Python code) compiled by Hauke Licht and Fabienne Lind are collected in this [this repository](https://github.com/fabiennelind/Going-Cross-Lingual_Course)
+
 A [Tutorial](https://cran.r-project.org/web/packages/udpipe/vignettes/udpipe-annotation.html) on lemmatization with udpipe (Wijffels, 2021). 
 
 A [Tutorial](https://github.com/zumbov2/deeplr) on machine Translation with deeplr (Zumbach & Bauer, 2021).
