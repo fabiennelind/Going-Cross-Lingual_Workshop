@@ -9,7 +9,7 @@ The wide-reaching and still growing digitalization of communication raised a dem
 
 - Example text data sets with migration and climate texts.
 
-- Code: R scripts with tasks and solutions.
+- Code: R scripts.
 
 ## More resources for multilingual text analysis
 
