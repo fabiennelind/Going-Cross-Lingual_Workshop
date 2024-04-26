@@ -1,0 +1,254 @@
+---
+title: "Implementing input alignment via machine translation"
+author: "Fabienne Lind"
+date: "2024-04-20"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Implementing input alignment via machine translation
+
+## Data
+
+For the next tasks, we will work with an example text data, headlines from news articles about migration. The data set is a subset of the [REMINDER media corpus](https://doi.org/10.11587/IEGQ1B).
+
+Let's load the data first and take a look. Each row represents one news article. How many articles per country do we have?
+
+```{r}
+
+articles <- read.csv("https://raw.githubusercontent.com/fabiennelind/Going-Cross-Lingual_Workshop/master/data/multilingual_data_annotated.csv")
+
+table(articles$country) 
+
+```
+
+
+Let us now inspect the column `headline`, the column with our text to be pre-processed. 
+
+```{r}
+
+head(articles$headline) # show the first lines of the column
+class(articles$headline) # check the class of the column.
+#articles$headline <- as.character(articles$headline) # Change the class of the text column to character if this is not the case already.
+
+```
+
+For our exercise, we work with the headlines of the corpus parts published in Germany, Spain, and the UK separately. Thus, we first need to apply filters. We save the German subset in a dataframe object called `articles_de`, the Spanish subset in a dataframe called `articles_es`, the English part in a dataframe called `articles_en`.
+
+```{r}
+
+library(dplyr)
+
+articles_de <- articles %>% 
+  filter(country == "Germany")
+
+articles_es <- articles %>% 
+  filter(country == "Spain")
+
+articles_en <- articles %>% 
+  filter(country == "UK")
+
+```
+
+
+## 1. Translation prize
+
+One approach to process the multilingual documents all together is to translate them first into a common language (= input alignment). Translation can also be useful or necessary to be performed on keywords of a search string, keywords of a dictionary, codebook instructions, extracted Part-of-Speech etc. 
+
+Next to manual translation, machine translation can be performed. 
+
+- [DeepL](https://www.rstudio.com)
+
+To calculate the prize beforehand, I recommend to count the number of characters first for example with `n_char`.
+
+```{r}
+
+#number of characters DE sample
+n_char <- nchar(articles_de$headline)# whitespaces are also counted 
+n_char_de <- sum(n_char, na.rm = T) 
+
+#number of characters ES sample
+n_char <- nchar(articles_es$headline)# whitespaces are also counted 
+n_char_es <- sum(n_char, na.rm = T) 
+
+#Calculate Prize
+translation_prize_case <- (((n_char_de + n_char_es)/1000000)*20) #Neutral Translation Model Online Predictions (20 Dollar/1M Characters)
+translation_prize_case 
+
+```
+
+
+## 2. Translation with the DeepL API
+
+DeepL offers the [DeepL API Free](https://developers.deepl.com/docs) which allows a maximum of 500,000 characters/month to be translated for free. To use the API, it is necessary to create an account and provide your credit card details. After creating an account you will receive an Authentication Key (You find it your DeepL account settings). With [deeplr](https://github.com/zumbov2/deeplr) [(Zumbach & Bauer, 2021)](https://CRAN.R-project.org/package=deeplr), a new wrapper for the DeepL API it is easily possible to work with it from R. 
+
+
+Put your API key in the quotes below: 
+
+```{r}
+my_key <- "put_your_API_key_here"
+```
+
+However, you should avoid to share your API keys directly in your script
+
+The much saver options are the following:
+
+1. Save an API key in the R environment. 
+
+How to do this: 
+
+```{r}
+#1. Set the environment variable. You need to do this only once. You can delete this line from your script later on.
+#Sys.setenv(GPT_API_KEY = "put_your_API_key_here")
+
+#2. Access the environment variable in your script. After storing the API key in your environment you can from now on call it with the following function.
+#my_key <- Sys.getenv("GPT_API_KEY")
+```
+
+2. Store your APIs in a local file. 
+
+```{r}
+library(readxl)
+setwd("/Users/fabiennelind/ucloud/Research/APIs")
+api_keys <- read_excel("api_keys.xlsx")
+my_key <- api_keys$deepl_API
+```
+
+Let's inspect the capabilities of the deepl translation model and monitor our usage. 
+Important: Functions that call the free API end with a 2. For example, with the free API it is available_languages2(), with the pro API it is free API it is available_languages()
+
+```{r}
+#install.packages("deeplr")
+library(deeplr)
+
+#show available languages
+langs <- available_languages(my_key) 
+as.data.frame(langs)
+
+#monitor your usage
+usage(my_key)
+
+```
+
+
+This code will translate the text of column `headline_de` and `headline_es` and save the result in `headline_mt`. The source languages is guessed automatically if `source_lang = NULL`. The target language is here defined as `EN` = English.
+
+Let's first do a test (recommended). 
+
+```{r}
+articles_de_test <- articles_de %>% 
+  sample_n(5)
+
+#translate DE to EN
+articles_de_test$headline_mt <- translate(
+  articles_de_test$headline,
+  source_lang = "DE", #if source_lang = NULL, the source language will be guessed
+  target_lang = "EN",
+  auth_key = my_key 
+  )
+
+```
+
+Now: The full corpus
+
+```{r}
+
+#translate DE to EN
+articles_de$headline_mt <- translate(
+  articles_de$headline,
+  source_lang = "DE", #if source_lang = NULL, the source language will be guessed
+  target_lang = "EN",
+  auth_key = my_key 
+  )
+
+as.data.frame(articles_de)
+
+#translate ES to EN
+articles_es$headline_mt <- translate(
+  articles_es$headline,
+  source_lang = "ES", #if source_lang = NULL, the source language will be guessed
+  target_lang = "EN",
+  auth_key = my_key 
+  )
+
+# No need to translate the UK subset, because it is already in English. 
+
+```
+
+Create one dataframe with the translated text.
+
+```{r}
+articles_en$headline_mt <- articles_en$headline
+articles_mt <- bind_rows(articles_es, articles_es, articles_en)
+
+```
+
+Tip: For larger corpora, it is recommended to translate not all at once but to divide the dataset in smaller sets before. 
+
+
+
+# Translate with Google Translate
+
+When using the Google Translate API, we need to enable the Translation API and generate credentials for API access. 
+
+To enable the Translation API in the Google Developer Console and create service account credentials, follow these steps:
+    Create a Google Cloud Project:
+        Go to the Google Cloud Console. https://console.cloud.google.com/
+        Click on the project drop-down at the top of the page and select or create a project.
+    Enable the Translation API for the project:
+        In the Google Cloud Console, navigate to the "API & Services" > "Library" page.
+        Search for "Cloud Translation API" and enable it for your project.
+        If prompted to set up billing, do so by clicking enabling billing/creating a billing account.
+    Create access credentials:
+        In the Google Cloud Console, navigate to the "API & Services" > "Credentials" page.
+        In the "Service Accounts" section, click "Mangage service accounts".
+        At the top of the "Service accounts" page, click "CREATE SERVICE ACCOUNT".
+        Give the service account a name and ID (e.g., 'translate') and click "CREATE AND CONTINUE".
+        Give the service account the role of an "Editor" and click "CREATE AND CONTINUE" and then "CREATE"
+        Back at the "Service accounts" page, click the "Actions" button next to the new service role and select "Managage keys".
+        Click "ADD KEY" > "Create new key".
+        Select the JSON key type and click "CREATE".
+        A JSON file with your credentials should be downloaded to your computer (remember where you saved it!).
+
+    Your service account will be created, and you'll be prompted to download the credentials. Select "JSON" format.
+    Once downloaded, move the JSON key file into your R working directory.
+
+
+```{r}
+install.packages("googleLanguageR")
+library(googleLanguageR)
+
+```
+
+Once you've stored the credential file in a specific location (let's say the file path is stored in a variable called "credential.json"), the next step is to configure googleLanguageR to use this file for authentication with Google's API.
+
+```{r}
+setwd("/Users/fabiennelind/ucloud/Research/APIs")
+gl_auth("google_t_credentials.json")
+```
+
+
+Available languages
+
+```{r}
+gl_translate_languages()
+```
+
+Detect languages
+
+```{r}
+text = "Ketika kita berani melangkah, dunia akan membuka pintu bagi kita."
+gl_translate_detect(text)
+
+```
+
+
+Translate languages
+
+```{r}
+text = "Ketika kita berani melangkah, dunia akan membuka pintu bagi kita."
+text_mt <- gl_translate(text, format = 'text', source = 'id', target = 'de')
+```
+
+
