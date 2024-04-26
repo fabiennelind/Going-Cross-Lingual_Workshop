@@ -14,7 +14,7 @@ The wide-reaching and still growing digitalization of communication raised a dem
 ## Manual baseline
 - Intercoder set coder 1: https://docs.google.com/spreadsheets/d/1pixKRYH9fkpcMBmIZym1ggnutldY5c3B2DiGnujWkjg/edit?usp=sharing
 - Intercoder set coder 2: https://docs.google.com/spreadsheets/d/1Tnvy3Tu0sJJbwHwW6DzPQGnIgJPaQGRS2sMdLIMtm2A/edit?usp=sharing
-- Baseline set: 
+- Baseline set: https://docs.google.com/spreadsheets/d/1mHEdQvrJ4VLAhV8Q_s9EJV7b0vUqqcC4Lhc0IogeoEI/edit?usp=sharing
 
 ## More resources for multilingual text analysis
 
