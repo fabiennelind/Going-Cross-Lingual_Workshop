@@ -11,11 +11,6 @@ The wide-reaching and still growing digitalization of communication raised a dem
 
 - Code: R scripts.
 
-## Manual baseline
-- Intercoder set coder 1: https://docs.google.com/spreadsheets/d/1pixKRYH9fkpcMBmIZym1ggnutldY5c3B2DiGnujWkjg/edit?usp=sharing
-- Intercoder set coder 2: https://docs.google.com/spreadsheets/d/1Tnvy3Tu0sJJbwHwW6DzPQGnIgJPaQGRS2sMdLIMtm2A/edit?usp=sharing
-- Baseline set: https://docs.google.com/spreadsheets/d/1mHEdQvrJ4VLAhV8Q_s9EJV7b0vUqqcC4Lhc0IogeoEI/edit?usp=sharing
-
 ## More resources for multilingual text analysis
 
 Materials for a three day course on the topic (including R and Python code) compiled by Hauke Licht and Fabienne Lind are collected in this [this repository](https://github.com/fabiennelind/Going-Cross-Lingual_Course)
